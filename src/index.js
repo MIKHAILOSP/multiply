@@ -18,6 +18,7 @@ module.exports = function multiply(first, second) {
     let n1=0;
     let n2;
     let w=0;
+    let n3;
     // let pozitionE;
     if (q.toString(10).length<18) {
       str = q.toString(10);
@@ -45,8 +46,11 @@ module.exports = function multiply(first, second) {
                 poz2=parseInt(poz[0]);
                 
               } else {
-                itog.push(poz[0]);
+                if (poz!="") {itog.push(poz[0]);
                 poz2=0;
+                }
+                poz="";
+                
                 }
             }
             if (i==0){
@@ -58,24 +62,25 @@ module.exports = function multiply(first, second) {
               n1=0;
 
               for (let j=1; j<=itog.length;j++){// do .. while
-                if (itogsecond[j+w]!=undefined){
+                if ((itogsecond[j+w]!=undefined)&&(itog[j-1]!=undefined)){
                 n=(parseInt(itogsecond[j+w])+parseInt(itog[j-1])+n1).toString(10);
                   }else{
                     // if(n1>0){
                     //   n=n1.toString(10);
                     // }
-                    if (j==itog.length) { 
+                    // if (j==itog.length) { 
                       n=parseInt(itog[j-1])+n1;
-                    }
+                    // }
                    
                   }
                   n2=n.toString(10);
-                let n3=n2.split("");
+                 n3=n2.split("");
                 if (n3.length>1) {
                   n1=parseInt(n3[0]);
                   itogsecond.splice(j+w,1,n3[1]);
                   if (j==itog.length){
-                    itogsecond.splice(j+w+1,1,n3[0]);
+                    itogsecond.splice((j+w+1),1,n3[0]);
+                    n1=0;
                   }
                 } else {
                   itogsecond.splice(j+w,1,n3[0]);
